@@ -1,0 +1,16 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+catch_all:
+    path: /{any}
+    controller: App\Controller\PageController::mainPage
+    methods: GET
+    requirements:
+        any: .*
+
+app_routes:
+    resource: 'routes/app.yaml'
+    type: yaml

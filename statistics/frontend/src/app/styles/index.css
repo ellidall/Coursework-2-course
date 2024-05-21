@@ -1,0 +1,22 @@
+@import "normilize.css";
+@import "vars.css";
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: var(--color-customizer-scrollbar-thumb);
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  border: 3px solid transparent;
+  border-radius: 12px;
+  background: var(--color-customizer-scrollbar-thumb-hover);
+  background-clip: content-box;
+}
