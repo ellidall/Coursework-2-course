@@ -9,7 +9,7 @@
         },
         "files": [
             "./config/packages/doctrine.yaml",
-            "./src/Entity/.gitignore",
+            "./src/Model/.gitignore",
             "./src/Repository/.gitignore"
         ]
     },

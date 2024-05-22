@@ -4,13 +4,17 @@ controllers:
         namespace: App\Controller
     type: attribute
 
+app_routes:
+    resource: 'routes/app.yaml'
+    type: yaml
+
+vk_routes:
+    resource: 'routes/vk.yaml'
+    type: yaml
+
 catch_all:
     path: /{any}
     controller: App\Controller\PageController::mainPage
     methods: GET
     requirements:
         any: .*
-
-app_routes:
-    resource: 'routes/app.yaml'
-    type: yaml

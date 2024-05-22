@@ -1,0 +1,4 @@
+get_members:
+    path: /vk/get_members
+    controller: App\Controller\VKController::getGroupMembers
+    methods: GET
