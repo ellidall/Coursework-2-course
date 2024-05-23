@@ -21,10 +21,11 @@ class VKController extends AbstractController
 
     public function getGroupMembers(): Response
     {
+        set_time_limit(10 * 60);
 //        try
 //        {
             $walls = $this->service->getHashtags();
-            var_dump($walls);
+//            var_dump($walls);
             return $this->json($walls);
 //        }
 //        catch (GuzzleException $e)
