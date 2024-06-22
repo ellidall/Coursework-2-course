@@ -52,19 +52,46 @@ class VKApiAdapter
      */
     public function getUsersData(array $userIds): array
     {
-        $response = $this->client->request('GET', 'users.get', [
-            'query' => [
-                'user_ids' => implode(',', $userIds),
-                'access_token' => $this->accessToken,
-                'v' => self::VK_API_VERSION,
-            ],
-            'curl' => [
-                CURLOPT_SSL_VERIFYPEER => false,
-                CURLOPT_SSL_VERIFYHOST => 0,
-            ]
-        ]);
+        $allUserData = [];
+        $chunkSize = 200;
 
-        return json_decode($response->getBody()->getContents(), true);
+        $chunks = array_chunk($userIds, $chunkSize);
+
+        foreach ($chunks as $chunk) {
+            $response = $this->client->request('GET', 'users.get', [
+                'query' => [
+                    'user_ids' => implode(',', $chunk),
+                    'access_token' => $this->accessToken,
+                    'v' => self::VK_API_VERSION,
+                ],
+                'curl' => [
+                    CURLOPT_SSL_VERIFYPEER => false,
+                    CURLOPT_SSL_VERIFYHOST => 0,
+                ]
+            ]);
+
+            $data = json_decode($response->getBody()->getContents(), true);
+
+            if (isset($data['response'])) {
+                $allUserData = array_merge($allUserData, $data['response']);
+            }
+        }
+
+        return $allUserData;
+//
+//        $response = $this->client->request('GET', 'users.get', [
+//            'query' => [
+//                'user_ids' => implode(',', $userIds),
+//                'access_token' => $this->accessToken,
+//                'v' => self::VK_API_VERSION,
+//            ],
+//            'curl' => [
+//                CURLOPT_SSL_VERIFYPEER => false,
+//                CURLOPT_SSL_VERIFYHOST => 0,
+//            ]
+//        ]);
+//
+//        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**

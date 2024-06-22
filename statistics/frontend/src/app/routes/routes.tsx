@@ -11,7 +11,7 @@ const createRoute = (path: string, element: ReactNode): RouteObject => ({
 
 const routes: RouteObject[] = [
 	createRoute(
-		'/main',
+		'/',
 		withLayout(<MainPage/>, 'Статистика хештегов постов ВКонтакте'),
 	),
 	createRoute(

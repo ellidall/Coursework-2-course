@@ -1,0 +1,19 @@
+.button {
+  font: var(--font-text-medium);
+  font-weight: 700;
+  padding: 6px 10px;
+  cursor: pointer;
+  color: var(--color-main-color);
+  border: solid 3px var(--color-main-color);
+  border-radius: 6px;
+  background: var(--color-surface-white);
+}
+
+.hashtagContainer {
+  overflow-y: auto;
+  width: fit-content;
+  max-height: 400px;
+  padding: 40px;
+  border: solid 2px var(--color-main-color);
+  background: var(--color-surface-white);
+}

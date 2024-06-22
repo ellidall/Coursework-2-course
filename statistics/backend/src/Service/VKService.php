@@ -45,17 +45,20 @@ class VKService
      */
     public function getWallPostsTexts(): array
     {
-        $users = $this->getUsersWithoutWallPosts();
+        $userIds = $this->getGroupMemberIds();
 
         $texts = [];
-        foreach ($users as $user)
+        foreach ($userIds as $userId)
         {
-            $wallData = $this->getWallPostsDataByUserId($user->getId());
+            $wallData = $this->getWallPostsDataByUserId($userId);
             if (!$wallData) {
                 continue;
             }
             foreach ($wallData as $itemData)
             {
+                if (!isset($itemData['text'])) {
+                    continue;
+                }
                 $text = $itemData['text'];
                 if ($text) {
                     $texts[] = $text;
@@ -82,29 +85,29 @@ class VKService
         return $wall['items'];
     }
 
-    /**
-     * @return User[]
-     * @throws GuzzleException
-     */
-    private function getUsersWithoutWallPosts(): array
-    {
-        $response = $this->adapter->getUsersData($this->getGroupMemberIds());
-
-        $users = [];
-        foreach ($response['response'] as $user)
-        {
-            if (!$user['is_closed'])
-            {
-                $users[] = new User(
-                    id: $user['id'],
-                    firstName: $user['first_name'],
-                    lastName: $user['last_name'],
-                );
-            }
-        }
-
-        return $users;
-    }
+//    /**
+//     * @return User[]
+//     * @throws GuzzleException
+//     */
+//    private function getUsersWithoutWallPosts(): array
+//    {
+//        $response = $this->adapter->getUsersData($this->getGroupMemberIds());
+//
+//        $users = [];
+//        foreach ($response['response'] as $user)
+//        {
+//            if (!$user['is_closed'])
+//            {
+//                $users[] = new User(
+//                    id: $user['id'],
+//                    firstName: $user['first_name'],
+//                    lastName: $user['last_name'],
+//                );
+//            }
+//        }
+//
+//        return $users;
+//    }
 
     /**
      * @return int[]
@@ -112,9 +115,19 @@ class VKService
      */
     private function getGroupMemberIds(): array
     {
-        //TODO: получение всех --> в цикле отправлять запрос
-        $groupMembers = $this->adapter->getGroupMembers(self::ISPRING_INSTITUTE_GROUP_ID);
+        $allMembers = [];
+        $offset = 0;
+        $count = 500;
 
-        return array_values($groupMembers['response']['items']);
+        do {
+            $groupMembers = $this->adapter->getGroupMembers(self::ISPRING_INSTITUTE_GROUP_ID, $offset, $count);
+            $members = $groupMembers['response']['items'];
+
+            $allMembers = array_merge($allMembers, $members);
+
+            $offset += $count;
+        } while (count($members) > 0);
+
+        return array_values($allMembers);
     }
 }

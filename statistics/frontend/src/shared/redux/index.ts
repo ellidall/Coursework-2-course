@@ -1,1 +1,5 @@
-export {store} from './store'
+export {
+	store,
+	useAppDispatch,
+	useAppSelector,
+} from './store'

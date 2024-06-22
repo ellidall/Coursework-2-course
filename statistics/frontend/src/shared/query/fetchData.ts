@@ -1,4 +1,4 @@
-type MethodType = 'POST' | 'GET'
+import {MethodType} from 'shared/types'
 
 export const fetchData = async (url: string, method: MethodType, params?: any) => {
 	const data: any = {
@@ -13,9 +13,13 @@ export const fetchData = async (url: string, method: MethodType, params?: any) =
 	}
 
 	const response = await fetch(url, data)
-	if (!response.ok) {
-		throw new Error('Network response was not ok')
-	}
+
+	/*let result
+	response.json()
+		.then(res => {
+			result = res
+		})
+		.catch(err => alert('Ошибка: ' + err))*/
 
 	return await response.json()
 }
