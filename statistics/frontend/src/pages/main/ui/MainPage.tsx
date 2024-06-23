@@ -1,9 +1,11 @@
-import {GetHashtags} from 'features/getHastags'
+import {DrawGraph} from 'features/drawGraph'
+import {ShowHashtags} from 'features/showHashtags'
 
 const MainPage = () => (
 	<div>
 		{'MainPage'}
-		<GetHashtags/>
+		<ShowHashtags/>
+		<DrawGraph/>
 	</div>
 )
 

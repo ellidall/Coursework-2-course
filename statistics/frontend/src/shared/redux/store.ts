@@ -1,11 +1,11 @@
 import {configureStore} from '@reduxjs/toolkit'
-import {hashtagsSlice} from 'features/getHastags'
+import {verticesSlice} from 'entities/vertex'
 import {TypedUseSelectorHook, useDispatch, useSelector} from 'react-redux'
 import {api} from 'shared/hooks'
 
 const store = configureStore({
 	reducer: {
-		hashtags: hashtagsSlice.reducer,
+		vertices: verticesSlice.reducer,
 		[api.reducerPath]: api.reducer,
 	},
 	middleware: getDefaultMiddleware =>

@@ -1,0 +1,1 @@
+export {verticesSlice} from './model/verticesSlice'

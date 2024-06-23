@@ -1,1 +1,4 @@
-export type {MethodType} from './globalTypes'
+export type {
+	MethodType,
+	VertexType,
+} from './globalTypes'

@@ -78,20 +78,6 @@ class VKApiAdapter
         }
 
         return $allUserData;
-//
-//        $response = $this->client->request('GET', 'users.get', [
-//            'query' => [
-//                'user_ids' => implode(',', $userIds),
-//                'access_token' => $this->accessToken,
-//                'v' => self::VK_API_VERSION,
-//            ],
-//            'curl' => [
-//                CURLOPT_SSL_VERIFYPEER => false,
-//                CURLOPT_SSL_VERIFYHOST => 0,
-//            ]
-//        ]);
-//
-//        return json_decode($response->getBody()->getContents(), true);
     }
 
     /**

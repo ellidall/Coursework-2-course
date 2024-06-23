@@ -2,3 +2,8 @@ get_members:
     path: /vk/get_members
     controller: App\Controller\VKController::getGroupMembers
     methods: GET
+
+update_data:
+    path: /vk/update_data
+    controller: App\Controller\VKController::updateData
+    methods: GET
