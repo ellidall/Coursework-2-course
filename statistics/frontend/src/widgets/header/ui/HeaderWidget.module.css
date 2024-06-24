@@ -10,10 +10,10 @@
   align-items: center;
   justify-content: space-between;
   box-sizing: border-box;
-  max-width: 1440px;
+  max-width: 1200px;
   height: var(--header-height);
   margin: auto;
-  padding: 0 24px;
+  padding: 0 60px;
   background-color: var(--color-main-color);
 }
 

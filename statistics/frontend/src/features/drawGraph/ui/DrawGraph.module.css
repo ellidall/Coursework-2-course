@@ -1,23 +1,22 @@
-.showHashtags {
+.drawGraph {
   display: flex;
   flex-direction: column;
   width: fit-content;
   gap: 16px;
 }
 
-.hashtagContainer {
-  overflow-y: auto;
-  box-sizing: border-box;
+.container {
   width: fit-content;
-  max-height: 400px;
-  padding: 20px;
   border: solid 3px var(--color-main-color);
   border-radius: 6px;
   background: var(--color-surface-light-blue);
 }
 
-.text {
-  font: var(--font-text-medium);
-  color: var(--color-text-default);
-  font-weight: 500;
+.tooltip {
+  position: absolute;
+  visibility: hidden;
+  padding: 5px;
+  border: 1px solid #D3D3D3;
+  border-radius: 3px;
+  background: #F9F9F9;
 }

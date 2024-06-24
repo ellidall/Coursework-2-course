@@ -1,28 +1,31 @@
-import {useState} from 'react'
+import {Graph} from 'entities/graph'
+import {useMemo, useState} from 'react'
 import {useAppSelector} from 'shared/redux'
-import styles from '../../showHashtags/ui/ShowHashtags.module.css'
-import {Graph} from './Graph'
+import {Button} from 'shared/ui/button'
+import styles from './DrawGraph.module.css'
 
 const DrawGraph = () => {
 	const {vertices} = useAppSelector(state => state.vertices)
 	const [isVisible, setIsVisible] = useState(false)
 
+	const withHashtags = useMemo(
+		() => vertices.filter(item => item.hashtags.length !== 0),
+		[vertices])
+
 	return (
-		<>
-			<button
+		<div className={styles.drawGraph}>
+			<Button
 				className={styles.button}
-				onClick={() => setIsVisible(!isVisible)}
-			>
-				{isVisible ? 'Cкрыть хештеги' : 'Показать хештеги'}
-			</button>
+				onClick={() => setIsVisible(!isVisible)}>
+				{isVisible ? 'Удалить граф' : 'Показать граф'}
+			</Button>
 			{isVisible && (
-				<Graph
-					vertices={vertices.filter(item => item.hashtags.length !== 0)}
-					width={800}
-					height={800}
-				/>
+				<div className={styles.container}>
+					<Graph vertices={withHashtags} width={1080} height={700}/>
+				</div>
 			)}
-		</>
+		</div>
+
 	)
 }
 
